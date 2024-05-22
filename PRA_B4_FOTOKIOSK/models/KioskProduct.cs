@@ -10,6 +10,9 @@ namespace PRA_B4_FOTOKIOSK.models
     {
 
         public string Name { get; set; }
+        public string Beschrijving { get; set; }
+
+        public float Prijs { get; set; }
 
     }
 }
