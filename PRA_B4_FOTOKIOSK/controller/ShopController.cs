@@ -2,7 +2,6 @@
 using PRA_B4_FOTOKIOSK.models;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +10,6 @@ namespace PRA_B4_FOTOKIOSK.controller
 {
     public class ShopController
     {
-
         public static Home Window { get; set; }
 
         public void Start()
@@ -29,10 +27,8 @@ namespace PRA_B4_FOTOKIOSK.controller
             ShopManager.Products.Add(new KioskProduct("Sleutelhanger met foto", 4.99m, "Sleutelhanger met foto"));
             ShopManager.Products.Add(new KioskProduct("T-shirt met foto", 14.99m, "T-shirt bedrukt met foto"));
 
-
             // Update dropdown met producten
             ShopManager.UpdateDropDownProducts();
-
 
             GeneratePriceList();
         }
@@ -51,19 +47,43 @@ namespace PRA_B4_FOTOKIOSK.controller
         // Wordt uitgevoerd wanneer er op de Toevoegen knop is geklikt
         public void AddButtonClick()
         {
-            
+            try
+            {
+                // Haal geselecteerde product en aantal op
+                KioskProduct selectedProduct = ShopManager.GetSelectedProduct();
+                int? amountNullable = ShopManager.GetAmount();
+
+                // Controleer of er een product is geselecteerd
+                if (selectedProduct != null && amountNullable.HasValue)
+                {
+                    int amount = amountNullable.Value;
+
+                    // Bereken het totaalbedrag en toon het op de bon
+                    decimal totalAmount = selectedProduct.Price * amount;
+                    ShopManager.SetShopReceipt($"Totaalbedrag\n€{totalAmount}");
+                }
+                else
+                {
+                    // Product niet gevonden of geen hoeveelheid ingevoerd
+                    ShopManager.SetShopReceipt("Product of hoeveelheid niet ingevoerd");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handel andere fouten af
+                ShopManager.SetShopReceipt($"Fout: {ex.Message}");
+            }
         }
 
-        // Wordt uitgevoerd wanneer er op de Resetten knop is geklikt
         public void ResetButtonClick()
         {
-
+            // Reset de bon
+            ShopManager.SetShopReceipt("Eindbedrag\n€");
         }
 
-        // Wordt uitgevoerd wanneer er op de Save knop is geklikt
         public void SaveButtonClick()
         {
+            // Hier kun je code toevoegen om de transactie op te slaan, indien nodig
         }
-
     }
 }
