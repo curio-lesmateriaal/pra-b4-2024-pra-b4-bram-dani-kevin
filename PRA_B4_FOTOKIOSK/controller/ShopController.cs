@@ -24,10 +24,10 @@ namespace PRA_B4_FOTOKIOSK.controller
 
             // Vul de productlijst met producten
             ShopManager.Products.Add(new KioskProduct("Foto 10x15", 2.55m, "Foto afdruk 10x15 cm"));
-            ShopManager.Products.Add(new KioskProduct("Foto 20x30", 5.00m, "Foto afdruk 20x30 cm"));
-            ShopManager.Products.Add(new KioskProduct("Mok met foto", 9.99m, "Mok bedrukt met foto"));
-            ShopManager.Products.Add(new KioskProduct("Sleutelhanger met foto", 4.99m, "Sleutelhanger met foto"));
-            ShopManager.Products.Add(new KioskProduct("T-shirt met foto", 14.99m, "T-shirt bedrukt met foto"));
+            ShopManager.Products.Add(new KioskProduct("Foto 20x30", 4.95m, "Foto afdruk 20x30 cm"));
+            ShopManager.Products.Add(new KioskProduct("Mok met foto", 9.95m, "Mok bedrukt met foto"));
+            ShopManager.Products.Add(new KioskProduct("Sleutelhanger met foto", 6.12m, "Sleutelhanger met foto"));
+            ShopManager.Products.Add(new KioskProduct("T-shirt met foto", 11.99m, "T-shirt bedrukt met foto"));
 
 
             // Update dropdown met producten
