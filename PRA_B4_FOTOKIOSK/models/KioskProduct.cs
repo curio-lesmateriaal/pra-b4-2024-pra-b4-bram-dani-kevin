@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,11 +9,15 @@ namespace PRA_B4_FOTOKIOSK.models
 {
     public class KioskProduct
     {
-
         public string Name { get; set; }
-        public string Beschrijving { get; set; }
+        public decimal Price { get; set; }
+        public string Description { get; set; }
 
-        public float Prijs { get; set; }
-
+        public KioskProduct(string name, decimal price, string description)
+        {
+            Name = name;
+            Price = price;
+            Description = description;
+        }
     }
 }

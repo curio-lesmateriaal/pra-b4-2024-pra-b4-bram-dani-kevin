@@ -17,20 +17,35 @@ namespace PRA_B4_FOTOKIOSK.controller
         public void Start()
         {
             // Stel de prijslijst in aan de rechter kant.
-            ShopManager.SetShopPriceList("Prijzen:\nFoto 10x15: €2.55");
+            ShopManager.SetShopPriceList("Prijzen:\n");
 
             // Stel de bon in onderaan het scherm
             ShopManager.SetShopReceipt("Eindbedrag\n€");
 
             // Vul de productlijst met producten
-            ShopManager.Products.Add(new KioskProduct() { Name = "Foto 10x15" });
-            ShopManager.Products.Add(new KioskProduct() { Name = "Foto 20x30" });
-            ShopManager.Products.Add(new KioskProduct() { Name = "Mok met foto " });
-            ShopManager.Products.Add(new KioskProduct() { Name = "Sleutelhanger met foto" });
-            ShopManager.Products.Add(new KioskProduct() { Name = "T-shirt met foto" });
+            ShopManager.Products.Add(new KioskProduct("Foto 10x15", 2.55m, "Foto afdruk 10x15 cm"));
+            ShopManager.Products.Add(new KioskProduct("Foto 20x30", 5.00m, "Foto afdruk 20x30 cm"));
+            ShopManager.Products.Add(new KioskProduct("Mok met foto", 9.99m, "Mok bedrukt met foto"));
+            ShopManager.Products.Add(new KioskProduct("Sleutelhanger met foto", 4.99m, "Sleutelhanger met foto"));
+            ShopManager.Products.Add(new KioskProduct("T-shirt met foto", 14.99m, "T-shirt bedrukt met foto"));
+
 
             // Update dropdown met producten
             ShopManager.UpdateDropDownProducts();
+
+
+            GeneratePriceList();
+        }
+
+        public void GeneratePriceList()
+        {
+            ShopManager.SetShopPriceList("Prijzen:\n");
+
+            foreach (KioskProduct product in ShopManager.Products)
+            {
+                string priceListItem = $"{product.Name}: €{product.Price} - {product.Description}\n";
+                ShopManager.AddShopPriceList(priceListItem);
+            }
         }
 
         // Wordt uitgevoerd wanneer er op de Toevoegen knop is geklikt
