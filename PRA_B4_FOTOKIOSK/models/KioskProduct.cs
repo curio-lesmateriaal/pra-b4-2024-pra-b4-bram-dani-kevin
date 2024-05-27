@@ -20,4 +20,20 @@ namespace PRA_B4_FOTOKIOSK.models
             Description = description;
         }
     }
+
+    public class OrderedProduct
+    {
+        public string Fotonummer { get; set; }
+        public string ProductNaam { get; set; }
+        public float Aantal { get; set; }
+        public decimal Totaalprijs { get; set; }
+
+        public OrderedProduct(string Fotonummer, string ProductNaam, float Aantal, decimal Totaalprijs)
+        {
+            Fotonummer = Fotonummer;
+            ProductNaam = ProductNaam;
+            Aantal = Aantal;
+            Totaalprijs = Totaalprijs;
+        }
+    }
 }
