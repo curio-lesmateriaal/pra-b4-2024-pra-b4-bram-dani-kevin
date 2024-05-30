@@ -14,17 +14,11 @@ namespace PRA_B4_FOTOKIOSK.controller
     {
         public static Home Window { get; set; }
 
-        private List<(KioskProduct Product, int Amount)> selectedProducts = new List<(KioskProduct, int)>();
-        private decimal totalAmount = 0;
-
         public void Start()
         {
             ShopManager.SetShopPriceList("Prijzen:\n");
 
-
-
-            ShopManager.SetShopReceipt("Eindbedrag\n€0.00");
-
+            ShopManager.SetShopReceipt("Eindbedrag\n€");
 
             ShopManager.Products.Add(new KioskProduct("Foto 10x15", 2.55m, "Foto afdruk 10x15 cm"));
             ShopManager.Products.Add(new KioskProduct("Foto 20x30", 4.95m, "Foto afdruk 20x30 cm"));
@@ -43,7 +37,7 @@ namespace PRA_B4_FOTOKIOSK.controller
 
             foreach (KioskProduct product in ShopManager.Products)
             {
-                string priceListItem = $"{product.Name}: €{product.Price:F2} - {product.Description}\n";
+                string priceListItem = $"{product.Name}: €{product.Price} - {product.Description}\n";
                 ShopManager.AddShopPriceList(priceListItem);
             }
         }
@@ -55,23 +49,12 @@ namespace PRA_B4_FOTOKIOSK.controller
                 KioskProduct selectedProduct = ShopManager.GetSelectedProduct();
                 int? amountNullable = ShopManager.GetAmount();
 
-
-
-
                 if (selectedProduct != null && amountNullable.HasValue)
                 {
                     int amount = amountNullable.Value;
 
-
-
-                    selectedProducts.Add((selectedProduct, amount));
-
-   
-                    totalAmount += selectedProduct.Price * amount;
-
-
-                    UpdateReceipt();
-
+                    decimal totalAmount = selectedProduct.Price * amount;
+                    ShopManager.SetShopReceipt($"Totaalbedrag\n€{totalAmount}");
                 }
                 else
                 {
@@ -86,26 +69,7 @@ namespace PRA_B4_FOTOKIOSK.controller
 
         public void ResetButtonClick()
         {
-
-
-            selectedProducts.Clear();
-            totalAmount = 0;
-
-
-            ShopManager.SetShopReceipt("Eindbedrag\n€0.00");
-        }
-
-        private void UpdateReceipt()
-        {
-            StringBuilder receipt = new StringBuilder("Kassabon:\n");
-
-            foreach (var (product, amount) in selectedProducts)
-            {
-                receipt.AppendLine($"{amount} x {product.Name} - €{product.Price * amount:F2}");
-            }
-
-            receipt.AppendLine($"\nEindbedrag: €{totalAmount:F2}");
-            ShopManager.SetShopReceipt(receipt.ToString());
+            ShopManager.SetShopReceipt("Eindbedrag\n€");
         }
 
 
