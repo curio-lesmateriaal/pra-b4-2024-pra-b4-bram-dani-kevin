@@ -109,35 +109,25 @@ namespace PRA_B4_FOTOKIOSK.controller
         }
 
 
-        public string GetShopReceiptText()
-        {
-            return ShopManager.GetShopReceipt();
-        }
         public void SaveButtonClick()
         {
             try
             {
-                string bonInhoud = GetShopReceiptText();
+                string receiptText = ShopManager.GetShopReceiptText();
 
-                if (!string.IsNullOrEmpty(bonInhoud))
-                {
-                    string bestandsnaam = "bon.txt";
-                    string mapPad = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                    string volledigPad = Path.Combine(mapPad, bestandsnaam);
+                string path = "../../../bon.txt";
+                StreamWriter sw = new StreamWriter(path);
+                sw.WriteLine("GetShopReceipt");
+                sw.Close();
 
-                    File.WriteAllText(volledigPad, bonInhoud);
-                    ShopManager.SetShopReceipt("Bon succesvol opgeslagen");
-                }
-                else
-                {
-                    ShopManager.SetShopReceipt("Kan geen lege bon opslaan");
-                }
+                File.WriteAllText(path, receiptText);
+
+                ShopManager.SetShopReceipt($"Bon succesvol opgeslagen");
             }
             catch (Exception ex)
             {
                 ShopManager.SetShopReceipt($"Fout bij opslaan bon: {ex.Message}");
             }
         }
-
     }
 }

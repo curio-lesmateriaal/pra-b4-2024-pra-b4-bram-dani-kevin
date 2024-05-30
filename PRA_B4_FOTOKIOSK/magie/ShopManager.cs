@@ -83,5 +83,9 @@ namespace PRA_B4_FOTOKIOSK.magie
             }
             return id;
         }
+        public static string GetShopReceiptText()
+        {
+            return GetShopReceipt();
+        }
     }
 }
