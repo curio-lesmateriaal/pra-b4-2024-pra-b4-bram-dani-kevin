@@ -11,7 +11,7 @@ namespace PRA_B4_FOTOKIOSK.models
 
         public int Id { get; set; }
         public string Source { get; set; }
-        public DateTime Date { get; set; } // Add Date property
-        public TimeSpan Time { get; set; } // Add Time property
+        public DateTime Date { get; set; }
+        public TimeSpan Time { get; set; }
     }
 }
