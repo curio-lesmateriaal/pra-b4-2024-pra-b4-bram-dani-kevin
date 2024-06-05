@@ -51,6 +51,15 @@ namespace PRA_B4_FOTOKIOSK.controller
                 {
                     foundsearch = file;
                     SearchManager.SetPicture(foundsearch);
+
+                    string[] fileInfo = Path.GetFileNameWithoutExtension(file).Split('_');
+
+                    string id = fileInfo[3].Split("id")[1];
+
+                    string imageInfo = $"ID: {id}\n";
+                    imageInfo += $"Tijd: {fileInfo[0]}:{fileInfo[1]}:{fileInfo[2]}\n";
+                    imageInfo += $"Datum: {now:dd/MM/yyyy}";
+                    SearchManager.SetSearchImageInfo(imageInfo);
                 }
 
             }
