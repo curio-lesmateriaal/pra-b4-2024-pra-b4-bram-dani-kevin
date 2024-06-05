@@ -18,7 +18,7 @@ namespace PRA_B4_FOTOKIOSK.controller
         // Start method called when the search page opens
         public void Start()
         {
-            ShopManager.Instance = Window;
+            SearchManager.Instance = Window;
         }
 
         // Method called when the Search button is clicked
