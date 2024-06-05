@@ -25,7 +25,6 @@ namespace PRA_B4_FOTOKIOSK.controller
         public void SearchButtonClick()
         {
 
-
         }
 
     }
