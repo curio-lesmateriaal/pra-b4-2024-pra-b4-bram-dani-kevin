@@ -41,6 +41,10 @@ namespace PRA_B4_FOTOKIOSK.controller
                 string fileName = Path.GetFileName(file);
                 DateTime timestamp = ParseTimestampFromFileName(fileName);
 
+                int hour = now.Hour;
+                int minute = now.Minute - 2;
+                int second = now.Second;
+
                 if (timestamp != DateTime.MinValue)
                 {
                     allPhotos.Add(new Tuple<DateTime, string>(timestamp, file));
