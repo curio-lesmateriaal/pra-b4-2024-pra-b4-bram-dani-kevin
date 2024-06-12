@@ -12,23 +12,27 @@ namespace PRA_B4_FOTOKIOSK.controller
 {
     public class SearchController
     {
-        // The window displayed on the screen
+        // Het venster dat op het scherm wordt weergegeven
         public static Home Window { get; set; }
 
-        // Start method called when the search page opens
+        // Start methode die wordt aangeroepen wanneer de zoekpagina wordt geopend
         public void Start()
         {
+            // Stel de instantie van SearchManager in op het venster
             SearchManager.Instance = Window;
         }
 
-        // Method called when the Search button is clicked
+        // Methode die wordt aangeroepen wanneer de zoekknop wordt aangeklikt
         public void SearchButtonClick()
         {
+            // Variabele om de gevonden zoekopdracht op te slaan
             string foundsearch = "";
             var now = DateTime.Now;
             int day = (int)now.DayOfWeek;
-
+            
+            // Variabele om de directory (map) op te slaan
             string dir = "";
+            // Bepaal de juiste directory (map) op basis van de huidige dag van de week
             if (day == 0) dir = "../../../fotos/0_Zondag";
             else if (day == 1) dir = "../../../fotos/1_Maandag";
             else if (day == 2) dir = "../../../fotos/2_Dinsdag";
@@ -37,7 +41,7 @@ namespace PRA_B4_FOTOKIOSK.controller
             else if (day == 5) dir = "../../../fotos/5_Vrijdag";
             else if (day == 6) dir = "../../../fotos/6_Zaterdag";
 
-
+            // Doorloop alle bestanden in de gekozen directory (map)
             foreach (string file in Directory.GetFiles(dir))
             {
                 string[] hankiepankie3000 = SearchManager.GetSearchInput().Split("_");
@@ -45,6 +49,7 @@ namespace PRA_B4_FOTOKIOSK.controller
                 int minute = int.Parse(hankiepankie3000[1]);
                 int second = int.Parse(hankiepankie3000[2]);
 
+                // Maak een string aan met het tijd-formaat "uur_minuut_seconde_"
                 string timeDateString = string.Format("{0:D2}_{1:D2}_{2:D2}_", hour, minute, second);
 
                 if (file.Contains(timeDateString))
